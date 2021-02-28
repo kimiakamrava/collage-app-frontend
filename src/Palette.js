@@ -19,10 +19,10 @@ import "./Palette.css";
          this.setState({ format: value });
         }
     render() {
-        const { colors } =this.props.palette;
+        const { colors, paletteName } =this.props.palette;
         const { level, format }  =this.state
         const paletteBoxes = colors[level].map(color =>(
-            <PaletteBox background={color[format]} name={color.name}  />
+            <PaletteBox background={color[format]} name={color.name} key={color.id}  />
         ))
         return (
             <div className="Palette">
@@ -32,13 +32,15 @@ import "./Palette.css";
                  handleChange={this.changeFormat}
                 />
                 {/*Navbar goes here*/}    
-             <div className="Palette-colors">
-                 {paletteBoxes}
-                {/*bunch of color and image boxes*/}
-             </div>
-             {/* footer eventually*/}
+                <div className="Palette-colors">{paletteBoxes}</div>
+                <footer className="Single-Palette-footer">
+                    {paletteName}
+                    
+                </footer>
+            
+             {/* footer eventually and profile picture*/}
             </div>
-        )
+        );
     }
 }
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import "rc-slider/assets/index.css";
 import Slider from "rc-slider";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import "./Navbar.css"
 
 
