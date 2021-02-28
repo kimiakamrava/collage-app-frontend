@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HomePalette from './HomePalette';
 import { Link } from "react-router-dom";
 
 class PaletteAll extends Component {
@@ -6,11 +7,10 @@ class PaletteAll extends Component {
         const { palettes } = this.props;
         return (
             <div>
+                <HomePalette/>
                 <h1>My Palettes</h1>
                 {palettes.map(palette => (
-                    <p>
-                     <Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
-                    </p>
+                 <HomePalette {...palette}/>
                 ))}    
 
             </div>
