@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
 import Palette from "./Palette";
+import PaletteAll from "./PaletteAll";
 import seedColors from "./seedColors";
 import { createPalette } from "./materialHelpers";
 
@@ -14,6 +15,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" render={() =><h1>sign in goes here</h1>}/>
+        <Route exact path="/palettes" render={() => <PaletteAll palettes={seedColors}/> }/>
         <Route exact path="/palette/:id"
          render={routeProps => (
          <Palette 
@@ -21,7 +23,7 @@ class App extends Component {
           (this.findPalette(routeProps.match.params.id)
           )} />
         )}/>
-        <Route exact path="/palettes" render={() =><h1>my palette</h1>}/>
+        
         
       </Switch>
       
