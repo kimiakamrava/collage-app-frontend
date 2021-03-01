@@ -24,14 +24,19 @@ class App extends Component {
           (this.findPalette(routeProps.match.params.id)
           )} />
         )}/>
-        <Route exact path='/palette/:paletteId/:colorId' render={() => <ColorShadePalette/>}/>
+        <Route exact path='/palette/:paletteId/:colorId' 
+        render={routeProps => (
+          <ColorShadePalette
+          colorId={routeProps.match.params.colorId}
+          palette={createPalette
+           (this.findPalette(routeProps.match.params.paletteId)
+          )} 
+         />
+        )}
+        />
       </Switch>
-      
-      // <div>
-      //   <Palette palette={createPalette(seedColors[4])} />
-      // </div>
     );
-  }
-}
+  };
+};
 
 export default App;

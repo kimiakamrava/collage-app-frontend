@@ -16,8 +16,8 @@ class PaletteBox extends Component {
         });
     }
     render() {
-        const {name, background, paletteId, colorId } = this.props;
-        const {Done} = this.state;
+        const { name, background, paletteId, colorId } = this.props;
+        const { Done } = this.state;
         return(
          <CopyToClipboard text={background} onCopy={this.changeCopyState}>
             <div style={{ background }} className='PaletteBox'>
