@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 import "./PaletteBox.css";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { withRouter, Link } from "react-router-dom";
+
 
 class PaletteBox extends Component {
     constructor(props) {
@@ -33,7 +35,9 @@ class PaletteBox extends Component {
              </div>
              <button className="copy-button">Copy</button>
              </div>
-             <span className="see-more">More</span>
+             <Link to='/palettes' onClick={e => e.stopPropagation()}>
+              <span className="see-more">Shades</span>
+             </Link>
             </div>
          </CopyToClipboard>
         )
