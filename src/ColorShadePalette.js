@@ -19,7 +19,7 @@ class ColorShadePalette extends Component {
         return shades.slice(1);
     }
     render() {
-        const ShadeBoxes = this.preShades.map(color => (<PaletteBox key={color.id} name={color.name} background={color.hex} />))
+        const ShadeBoxes = this.preShades.map(color => (<PaletteBox key={color.id} name={color.name} background={color.hex} moreLink={false} />))
         return (
             <div className="Palette">
                 <h1> color shade</h1>

@@ -22,7 +22,7 @@ import "./Palette.css";
         const { colors, paletteName, id } =this.props.palette;
         const { level, format }  =this.state
         const paletteBoxes = colors[level].map(color =>(
-            <PaletteBox background={color[format]} name={color.name} key={color.id} colorId={color.id} paletteId={id} />
+            <PaletteBox background={color[format]} name={color.name} key={color.id} colorId={color.id} paletteId={id} moreLink={true} />
         ))
         return (
             <div className="Palette">
