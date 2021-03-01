@@ -19,7 +19,7 @@ class Navbar extends Component {
         this.props.handleChange(e.target.value);
     }
     render() {
-        const {level, changeLevel} = this.props;
+        const {level, changeLevel, isAllColors } = this.props;
         const {format} = this.state;
         return (
             <header className="Navbar">
@@ -27,7 +27,7 @@ class Navbar extends Component {
                     <Link to='/palettes'>LET'S PALETTE</Link>
                     {/* <a href="link of react route">LET'S PALETTE</a> */}
                 </div>
-                <div className="slider-component">
+                {isAllColors && ( <div className="slider-component">
                     <div className='slider'>
                         <span>{level}</span>
                       <Slider 
@@ -37,9 +37,9 @@ class Navbar extends Component {
                          step={100}
                          onAfterChange={changeLevel}
                         />
-                    </div>
-                    
+                    </div>  
                 </div>
+                )}
                 <div className="select-container">
                   <Select value={format} onChange={this.handleChange}>
                      <MenuItem value='hex'>HEX - #ffffff</MenuItem>

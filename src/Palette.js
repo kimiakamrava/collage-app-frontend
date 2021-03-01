@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PaletteBox from "./PaletteBox";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import "./Palette.css";
 
 
@@ -30,14 +31,11 @@ import "./Palette.css";
                  level={level}
                  changeLevel={this.changeLevel}
                  handleChange={this.changeFormat}
+                 isAllColors
                 />
                 {/*Navbar goes here*/}    
                 <div className="Palette-colors">{paletteBoxes}</div>
-                <footer className="Single-Palette-footer">
-                    {paletteName}
-                    
-                </footer>
-            
+                <Footer paletteName={paletteName}/>
              {/* footer eventually and profile picture*/}
             </div>
         );
