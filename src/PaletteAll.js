@@ -42,6 +42,9 @@ const style = {
 };
 
 class PaletteAll extends Component {
+    openPalette(id) {
+    this.props.history.push(`/palette/${id}`);    
+    }
     render() {
         const { palettes, classes } = this.props;
         return (
@@ -52,7 +55,7 @@ class PaletteAll extends Component {
                     </nav>
                    <div className={classes.palettes}>  
                      {palettes.map(palette => (
-                       <HomePalette {...palette}/>
+                       <HomePalette {...palette} handleClick={() => this.openPalette(palette.id)} />
                     ))}  
                     </div> 
                 </div>
