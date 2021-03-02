@@ -11,14 +11,22 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import {ChromePicker} from 'react-color';
 
 
-const drawerWidth = 500;
+const drawerWidth = 240;
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    color: 'gray',
+    
   },
+  MuiAppBarColorPrimary :{
+    color: "#fff",
+    backgroundColor: "gray",
+   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -42,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    
   },
   drawerPaper: {
     width: drawerWidth,
@@ -100,7 +109,8 @@ export default function CreatePalette() {
               Persistent drawer
             </Typography>
             <IconButton
-              color="inherit"
+              color="gray"
+              background-color="gray"
               aria-label="open drawer"
               edge="end"
               onClick={handleDrawerOpen}
@@ -116,6 +126,7 @@ export default function CreatePalette() {
           })}
         >
           <div className={classes.drawerHeader} />
+          <ChromePicker/>
          
         </main>
         <Drawer
