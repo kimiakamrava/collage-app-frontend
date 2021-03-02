@@ -1,158 +1,184 @@
-import React, { Component } from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {ChromePicker} from 'react-color';
+import React, { Component } from "react";
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import Button from "@material-ui/core/Button";
+import Drag from './Drag';
+import { ChromePicker } from "react-color";
 
-
-const drawerWidth = 350;
-
-
-const useStyles = makeStyles((theme) => ({
+const drawerWidth = 400;
+const styles = theme => ({
   root: {
-    display: 'flex',
-    color: 'gray',
-    
+    display: "flex"
   },
-  MuiAppBarColorPrimary :{
-    color: "#fff",
-    backgroundColor: "gray",
-   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginRight: drawerWidth,
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
-  title: {
-    flexGrow: 1,
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 20
   },
   hide: {
-    display: 'none',
+    display: "none"
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
-    
+    flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
+    display: "flex",
+    alignItems: "center",
+    padding: "0 8px",
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-start',
+    justifyContent: "flex-end"
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    height: "calc(100vh - 64px)",
+    padding: theme.spacing.unit * 3,
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    marginRight: -drawerWidth,
+    marginLeft: -drawerWidth
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginRight: 0,
-  },
-}));
+    marginLeft: 0
+  }
+});
 
+class CreatePalette extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          open: true,
+          currentColor: "teal",
+          colors: ["purple", "#e15764"]
+        };
+        this.updateCurrentColor = this.updateCurrentColor.bind(this);
+        this.addNewColor = this.addNewColor.bind(this);
+    }
+      
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  };
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  };
 
-export default function CreatePalette() {
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-  
-    const handleDrawerOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
-  
+  updateCurrentColor(newColor) {
+    this.setState({ currentColor: newColor.hex });
+  }
+
+  addNewColor() {
+    this.setState({ colors: [...this.state.colors, this.state.currentColor] });
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { open } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
+          position='fixed'
+          className={classNames(classes.appBar, {
+            [classes.appBarShift]: open
           })}
         >
-          <Toolbar>
-            <Typography variant="h6" noWrap className={classes.title}>
-              Persistent drawer
-            </Typography>
+          <Toolbar disableGutters={!open}>
             <IconButton
-              color="gray"
-              background-color="gray"
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerOpen}
-              className={clsx(open && classes.hide)}
+              color='inherit'
+              aria-label='Open drawer'
+              onClick={this.handleDrawerOpen}
+              className={classNames(classes.menuButton, open && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
+            <Typography variant='h6' color='inherit' noWrap>
+              Persistent drawer
+            </Typography>
           </Toolbar>
         </AppBar>
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        >
-          <div className={classes.drawerHeader} />
-         
-         
-        </main>
         <Drawer
           className={classes.drawer}
-          variant="persistent"
-          anchor="right"
+          variant='persistent'
+          anchor='left'
           open={open}
           classes={{
-            paper: classes.drawerPaper,
+            paper: classes.drawerPaper
           }}
         >
           <div className={classes.drawerHeader}>
-
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            <IconButton onClick={this.handleDrawerClose}>
+              <ChevronLeftIcon />
             </IconButton>
           </div>
           <Divider />
-          <Button variant='text' color='white'>Color Suggestions</Button>
-          <ChromePicker color="purple" onChangeComplete={(newColor)=> console.log(newColor)}/>
-          
-          <Button variant='outlined' color='gray'>Select Color</Button>
-           <Button variant='text' color='gray'>Clear My Palette</Button>
-           
+         
+          <div>
+          <Button variant='text' color='gray'>
+              Color suggestions
+            </Button>
+          </div>
+          <ChromePicker
+            color={this.state.currentColor}
+            onChangeComplete={this.updateCurrentColor}
+        />
+             <Button
+            variant='contained'
+            color='gray'
+            onClick={this.addNewColor}
+          >
+            Select
+          </Button>
+          <Button variant='text' color='gray'>
+              Color suggestions
+            </Button>
         </Drawer>
+        <main
+          className={classNames(classes.content, {
+            [classes.contentShift]: open
+          })}
+        >
+          <div className={classes.drawerHeader} />
+          <ul>
+            {this.state.colors.map(color => (
+              <Drag color={color}/>
+            ))}
+          </ul>
+        </main>
       </div>
     );
   }
+}
+export default withStyles(styles, { withTheme: true })(CreatePalette);
+        
+
+
