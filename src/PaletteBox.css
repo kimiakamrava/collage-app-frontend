@@ -71,6 +71,12 @@
     text-transform: uppercase;
     font-size: 10px;
 }
+.lightish {
+ color:white;   
+}
+.PaletteBox .blackish {
+    color: gray;
+}
 
 .see-more{
     background: rgba(255, 255, 255, 0.3);
