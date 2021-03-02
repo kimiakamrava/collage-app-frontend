@@ -4,6 +4,7 @@ import Palette from "./Palette";
 import PaletteAll from "./PaletteAll";
 import ColorShadePalette from "./ColorShadePalette";
 import seedColors from "./seedColors";
+import CreatePalette from "./CreatePalette";
 import { createPalette } from "./materialHelpers";
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" render={() =><h1>sign in goes here</h1>}/>
+        <Route exact path="/palette/new" render={() => <CreatePalette/>}/>
         <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={seedColors} {...routeProps} /> )}/>
         <Route exact path="/palette/:id"
          render={routeProps => (

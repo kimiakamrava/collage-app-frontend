@@ -29,7 +29,12 @@ const style = {
         fontSize: "7px",
         width : "100%",
         justifyContent: "space-between",
-        color: "gray",   
+        color: "gray", 
+        "& a": {
+            color: "Black",
+            fontSize : "7px",
+            textDecoration: "none",
+        }  
     },
     palettes:{
       boxSizing: "border-box",
@@ -52,6 +57,7 @@ class PaletteAll extends Component {
                 <div className={classes.container}>
                     <nav className={classes.nav}>
                      <h1>My Palettes</h1>
+                     <Link to='/palette/new'>Create your Palette</Link>
                     </nav>
                    <div className={classes.palettes}>  
                      {palettes.map(palette => (

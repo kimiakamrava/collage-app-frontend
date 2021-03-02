@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import chroma from "chroma-js";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { withRouter, Link } from "react-router-dom";
+import { withStyles } from "@material-ui/styles";
 import "./PaletteBox.css";
 
+const style = {
+  whenDone: {
+    color: props =>chroma(props.background).luminance() > 0.7 ? "gray": "white"
+  }
+};
 
 class PaletteBox extends Component {
     constructor(props) {
@@ -17,7 +23,7 @@ class PaletteBox extends Component {
         });
     }
     render() {
-        const { name, background, paletteId, colorId, moreLink } = this.props;
+        const { name, background, paletteId, colorId, moreLink, classes } = this.props;
         const { Done } = this.state;
         const darkish = chroma(background).luminance() <= 0.05;
         const brightish = chroma(background).luminance() > 0.7;
@@ -30,7 +36,7 @@ class PaletteBox extends Component {
                 />
                 <div className={`done-msg ${Done && "show"}`}>
                     <h1>Done</h1>
-                    <p className={brightish && "blackish"}>{this.props.background}</p>
+                    <p className={classes.whenDone}>{this.props.background}</p>
                 </div>
              <div className="copy-container">
              <div className="box-content">
@@ -49,4 +55,4 @@ class PaletteBox extends Component {
     }
 }
 
-export default PaletteBox;
+export default  withStyles(style)(PaletteBox);
