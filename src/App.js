@@ -11,6 +11,13 @@ import { createPalette } from "./materialHelpers";
 import api from './api';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {palettes: seedColors}
+
+    this.savedPalette = this.savedPalette.bind(this);
+    this.findPalette = this.findPalette.bind(this)
+  }
   state = { auth: { currentUser: {} } };
 
   componentDidMount() {
@@ -37,10 +44,14 @@ class App extends Component {
     this.setState({ auth: { currentUser: {} } });
   };
 
+
   findPalette(id){
-   return seedColors.find(function(palette) {
+   return this.state.palettes.find(function(palette) {
       return palette.id === id;
     });
+  }
+  savedPalette(newPalette){
+    this.setState({palettes: [...this.state.palettes, newPalette]});
   }
   render() {
     return (
@@ -53,8 +64,8 @@ class App extends Component {
             }}
          />
         <Route exact path="/Signup" render={() => <Signup/>}/>
-        <Route exact path="/palette/new" render={() => <CreatePalette/>}/>
-        <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={seedColors} {...routeProps} /> )}/>
+        <Route exact path="/palette/new" render={(routeProps) => <CreatePalette savedPalette={this.savedPalette} {...routeProps}/>}/>
+        <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={this.state.palettes} {...routeProps} /> )}/>
         <Route exact path="/palette/:id"
          render={routeProps => (
          <Palette 

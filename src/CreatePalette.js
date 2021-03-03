@@ -86,6 +86,7 @@ class CreatePalette extends Component {
         this.updateSelectedColor = this.updateSelectedColor.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSavedPalette = this.handleSavedPalette.bind(this);
     }
 
     componentDidMount(){
@@ -121,6 +122,12 @@ class CreatePalette extends Component {
     this.setState({newName:e.target.value })
   }
 
+  handleSavedPalette(){
+    const newPalette = {paletteName:"New Test Palette", colors: this.state.colors};
+    this.props.savedPalette(newPalette);
+    this.props.history.push("/palettes");
+  }
+
 
   render() {
     const { classes } = this.props;
@@ -130,6 +137,7 @@ class CreatePalette extends Component {
         <CssBaseline />
         <AppBar
           position='fixed'
+          color='default'
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open
           })}
@@ -146,6 +154,7 @@ class CreatePalette extends Component {
             <Typography variant='h6' color='inherit' noWrap>
               Persistent drawer
             </Typography>
+            <Button variant='outlined' color="gray" onClick={this.handleSavedPalette}>Save</Button>
           </Toolbar>
         </AppBar>
         <Drawer
