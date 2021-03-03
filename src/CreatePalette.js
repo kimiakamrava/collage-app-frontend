@@ -12,6 +12,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
 import Drag from './Drag';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { ChromePicker } from "react-color";
 
 const drawerWidth = 400;
@@ -78,11 +79,26 @@ class CreatePalette extends Component {
         super(props);
         this.state = {
           open: true,
-          currentColor: "teal",
-          colors: ["purple", "#e15764"]
+          selectedColor: "teal",
+          newName:"",
+          colors: [{color: 'blue', name: "blue"}]
         };
-        this.updateCurrentColor = this.updateCurrentColor.bind(this);
+        this.updateSelectedColor = this.updateSelectedColor.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount(){
+      ValidatorForm.addValidationRule('uniqueColorName',value =>
+       this.state.colors.every(
+         ({name}) => name.toLowerCase() !== value.toLowerCase()
+        )
+      );
+      ValidatorForm.addValidationRule('uniqueColor', value =>
+      this.state.colors.every(
+        ({color}) => color !== this.state.selectedColor
+       )
+     );
     }
       
   handleDrawerOpen = () => {
@@ -92,13 +108,19 @@ class CreatePalette extends Component {
     this.setState({ open: false });
   };
 
-  updateCurrentColor(newColor) {
-    this.setState({ currentColor: newColor.hex });
+  updateSelectedColor(newColor) {
+    this.setState({ selectedColor: newColor.hex });
   }
 
   addNewColor() {
-    this.setState({ colors: [...this.state.colors, this.state.currentColor] });
+    const newColor={color: this.state.selectedColor, name:this.state.newName}
+    this.setState({ colors: [...this.state.colors, newColor], newName:" " });
   }
+
+  handleChange(e){
+    this.setState({newName:e.target.value })
+  }
+
 
   render() {
     const { classes } = this.props;
@@ -148,16 +170,24 @@ class CreatePalette extends Component {
             </Button>
           </div>
           <ChromePicker
-            color={this.state.currentColor}
-            onChangeComplete={this.updateCurrentColor}
-        />
-             <Button
+            color={this.state.selectedColor}
+            onChangeComplete={this.updateSelectedColor}
+         />
+         
+          <ValidatorForm onSubmit={this.addNewColor}>
+            <TextValidator value={this.state.newName} onChange={this.handleChange}
+            validators={["required", "uniqueColorName","uniqueColor"]}
+            errorMessages={["this section is required!", "oops you already took that name!","oops you already took that color!"]}/>
+            <Button
             variant='contained'
+            type="submit"
             color='gray'
-            onClick={this.addNewColor}
+            
           >
             Select
           </Button>
+          </ValidatorForm>
+           
           <Button variant='text' color='gray'>
               Color suggestions
             </Button>
@@ -170,7 +200,7 @@ class CreatePalette extends Component {
           <div className={classes.drawerHeader} />
           <ul>
             {this.state.colors.map(color => (
-              <Drag color={color}/>
+              <Drag color={color.color} name={color.name}/>
             ))}
           </ul>
         </main>

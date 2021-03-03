@@ -15,7 +15,7 @@ const style = {
 };
 
 function Drag(props){
-    return<div className={props.classes.drag} style={{backgroundColor: props.color}}>{props.color}</div>
+    return<div className={props.classes.drag} style={{backgroundColor: props.color}}>{props.name}</div>
 }
 
 export default withStyles(style)(Drag)
