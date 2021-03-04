@@ -136,6 +136,11 @@ class CreatePalette extends Component {
     this.props.savedPalette(newPalette);
     this.props.history.push("/palettes");
   }
+  deleteColor(colorName){
+    this.setState({
+      colors: this.state.colors.filter(color => color.name !== colorName)
+    })
+  }
 
 
   render() {
@@ -225,7 +230,7 @@ class CreatePalette extends Component {
           <div className={classes.drawerHeader} />
           <ul>
             {this.state.colors.map(color => (
-              <Drag color={color.color} name={color.name}/>
+              <Drag key={color.name} color={color.color} name={color.name} handleClick={() => this.deleteColor(color.name)}/>
             ))}
           </ul>
         </main>
