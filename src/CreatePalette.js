@@ -76,6 +76,9 @@ const styles = theme => ({
 });
 
 class CreatePalette extends Component {
+    static defaultProps = {
+      maxColors: 15
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -90,6 +93,8 @@ class CreatePalette extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSavedPalette = this.handleSavedPalette.bind(this);
         this.deleteColor = this.deleteColor.bind(this);
+        this.clearPalette = this.clearPalette.bind(this);
+        this.shuffle = this.shuffle.bind(this);
     }
 
     componentDidMount(){
@@ -126,10 +131,21 @@ class CreatePalette extends Component {
     this.setState({ colors: [...this.state.colors, newColor], newName:" " });
   }
 
-  handleChange(e){
+  handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
      })
+  }
+
+  clearPalette() {
+    this.setState({ colors: [] });
+  }
+
+  shuffle() {
+   const allColors = this.props.palettes.map(p => p.colors).flat();
+   const random = Math.floor(Math.random() * allColors.length);
+   const randColor = allColors[random];
+   this.setState({colors: [...this.state.colors, randColor] });
   }
 
   handleSavedPalette(){
@@ -149,11 +165,13 @@ class CreatePalette extends Component {
       colors: arrayMove(colors, oldIndex, newIndex),
     }));
   };
+ 
 
 
   render() {
-    const { classes } = this.props;
-    const { open } = this.state;
+    const { classes, maxColors } = this.props;
+    const { open, colors } = this.state;
+    const full = colors.length >= maxColors
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -203,8 +221,9 @@ class CreatePalette extends Component {
           <Divider />
          
           <div>
-          <Button variant='text' color='gray'>
-              Color suggestions
+          <Button variant='text' color='gray' onClick={this.shuffle} disabled={full}>
+          {full ? "Your palette is full" : "Color Suggestions"}
+              
             </Button>
           </div>
           <ChromePicker
@@ -217,17 +236,17 @@ class CreatePalette extends Component {
             validators={["required", "uniqueColorName","uniqueColor"]}
             errorMessages={["this section is required!", "oops you already took that name!","oops you already took that color!"]}/>
             <Button
-            variant='contained'
+            variant='outlined'
             type="submit"
             color='gray'
-            
+            disabled={full}
           >
-            Select
+            {full ? "Your palette is full" : "Select"}
           </Button>
           </ValidatorForm>
            
-          <Button variant='text' color='gray'>
-              Color suggestions
+          <Button variant='outlined' color='gray' onClick={this.clearPalette}>
+              Clear
             </Button>
         </Drawer>
         <main
