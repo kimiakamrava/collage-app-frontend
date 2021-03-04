@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
+import CreateNav from "./CreateNav";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -87,7 +88,7 @@ class CreatePalette extends Component {
           selectedColor: "teal",
           newName:"",
           colors: [{color: 'blue', name: "blue"}],
-          newPaletteName: "",
+          
         };
         this.updateSelectedColor = this.updateSelectedColor.bind(this);
         this.addNewColor = this.addNewColor.bind(this);
@@ -109,11 +110,7 @@ class CreatePalette extends Component {
         ({color}) => color !== this.state.selectedColor
        )
      );
-     ValidatorForm.addValidationRule("uniquePalette", value =>
-     this.props.palettes.every(
-       ({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
+   
     }
       
   handleDrawerOpen = () => {
@@ -149,9 +146,9 @@ class CreatePalette extends Component {
    this.setState({colors: [...this.state.colors, randColor] });
   }
 
-  handleSavedPalette(){
-    let newName = this.state.newPaletteName;
-    const newPalette = {paletteName:newName, id: newName.toLowerCase().replace(/ /g, "-"), colors: this.state.colors};
+  handleSavedPalette(newPaletteName) {
+    
+    const newPalette = {paletteName:newPaletteName, id: newPaletteName.toLowerCase().replace(/ /g, "-"), colors: this.state.colors};
     this.props.savedPalette(newPalette);
     this.props.history.push("/palettes");
   }
@@ -170,42 +167,15 @@ class CreatePalette extends Component {
 
 
   render() {
-    const { classes, maxColors } = this.props;
+    const { classes, maxColors, palettes } = this.props;
     const { open, colors } = this.state;
     const full = colors.length >= maxColors
     return (
       <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position='fixed'
-          color='default'
-          className={classNames(classes.appBar, {
-            [classes.appBarShift]: open
-          })}
-        >
-          <Toolbar disableGutters={!open}>
-            <IconButton
-              color='inherit'
-              aria-label='Open drawer'
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant='h6' color='inherit' noWrap>
-              Persistent drawer
-            </Typography>
-            <ValidatorForm onSubmit={this.handleSavedPalette}>
-            <TextValidator label="Palette Name" value={this.state.newPaletteName} name="newPaletteName"
-            onChange={this.handleChange}
-            validators={["required","uniquePalette"]}
-            errorMessages={["Please Name your Palette", "Already used name"]} />
-            
-            <Button variant='outlined' color="gray" type="submit">Save</Button>
-            <Link to="/palettes"><Button variant="outlined"  color="gray">LET'S PALETTE</Button></Link>
-            </ValidatorForm>
-          </Toolbar>
-        </AppBar>
+        <CreateNav open={open} classes={classes} palettes={palettes} 
+        handleSavedPalette={this.handleSavedPalette}
+        handleDrawerOpen={ this.handleDrawerOpen} />
+      
         <Drawer
           className={classes.drawer}
           variant='persistent'
