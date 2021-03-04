@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -201,6 +202,7 @@ class CreatePalette extends Component {
             errorMessages={["Please Name your Palette", "Already used name"]} />
             
             <Button variant='outlined' color="gray" type="submit">Save</Button>
+            <Link to="/palettes"><Button variant="outlined"  color="gray">LET'S PALETTE</Button></Link>
             </ValidatorForm>
           </Toolbar>
         </AppBar>

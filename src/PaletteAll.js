@@ -58,6 +58,7 @@ class PaletteAll extends Component {
                     <nav className={classes.nav}>
                      <h1>My Palettes</h1>
                      <Link to='/palette/new'>Create your Palette</Link>
+                     
                     </nav>
                    <div className={classes.palettes}>  
                      {palettes.map(palette => (
