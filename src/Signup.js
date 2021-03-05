@@ -1,70 +1,80 @@
-import React from 'react';
-import { Grid, Paper, Avatar, TextField, Button, Typography} from '@material-ui/core';
-import FaceIcon from '@material-ui/icons/Face';
 
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import api from './api'
 
-
-class SignUp extends React.Component {
-    
-    state = {
-        username: '',
-        password: ''
+class Signup extends Component {
+    constructor() {
+        super();
+        this.state = {
+            error: false,
+            fields: {
+                username: '',
+                email: '',
+                password: '',
+            },
+        };
     }
 
-    signUpChange = (e) => {
-        console.log(e.target.name)
-        this.setState({
-            [e.target.name]: e.target.value 
+    handleChange = (e) => {
+        const newFields = { ...this.state.fields, [e.target.name]: e.target.value };
+        this.setState({ fields: newFields });
+      };
+      handleSubmit = (e) => {
+        e.preventDefault();
+    
+        api.auth.Signup(this.state.fields.username, this.state.fields.email, this.state.fields.password).then((res) => {
+          if (res.error) {
+            this.setState({ error: true });
+          } else {
+            this.props.handleLogin(res);
+            this.props.history.push('/palettes');
+          }
         })
-    }   
+      };
+   render() {
+    const { fields } = this.state;
 
-
-    render() {
-    const paperStyle = {padding :20, height: '50vh', width:280, margin: "20px auto"}
-    const avatarStyle = {backgroundColor: 'pink'}
-    const buttonStyle = {margin: '8px 0'}
     return (
-    <form>
-        <Grid>
-        <Paper elevation={10} style={paperStyle}>
-            <Grid align="center">
-                <Avatar style={avatarStyle}><FaceIcon></FaceIcon></Avatar> 
-                <h2>Sign Up</h2>
-               
-            </Grid>
-            <TextField label="Create an Username" placeholder="Enter Username"  name="username" fullWidth required onChange={(e) => this.signUpChange(e)}/>
-
-            <TextField label="Create a Password" placeholder="Enter Password" type="password"  name="password" fullWidth required onChange={(e) => this.signUpChange(e)}/>
-
-                    <Button  type="submit" value="submit" background-color="white" fullWidth variant="contained" style={buttonStyle} onClick={(e) => this.props.handleSignUp(e, this.state)}>Create an Account</Button>
-                    <Typography> Have an account?
-                    <Link to="/login">
-                        Login
-                    </Link>
-                    </Typography> 
-                    {/* <Typography>
-                    <Link href="#" >
-                        Forgot Password?
-                    </Link>
-                    </Typography>
-                    <Typography> Do you have an account?
-                    <Link to="/asdfas" >
-                        Sign Up
-                    </Link>
-                    </Typography> */}
-                    {/* for the links above, consult https://material-ui.com/guides/composition/#link when you have time. */}
-                    
-        </Paper>
-    </Grid>
-    </form>
-    
-
-  )
-    }
-    
+      <div>
+        {this.state.error ? <h1>Try Again</h1> : null}
+        <div className="ui form">
+          <form onSubmit={this.handleSubmit}>
+            <div className="ui field">
+              <label>Username</label>
+              <input
+                name="username"
+                placeholder="username"
+                value={fields.username}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="ui field">
+              <label>email</label>
+              <input
+                name="email"
+                placeholder="email"
+                value={fields.email}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="ui field">
+              <label>Password</label>
+              <input
+                name="password"
+                type="password"
+                placeholder="password"
+                value={fields.password}
+                onChange={this.handleChange}
+              />
+            </div>
+            <button type="submit" className="ui basic green button">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default SignUp;
+export default Signup;

@@ -13,7 +13,8 @@ import api from './api';
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {palettes: seedColors}
+    const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
+    this.state = {palettes: savedPalettes || seedColors };
 
     this.savedPalette = this.savedPalette.bind(this);
     this.findPalette = this.findPalette.bind(this)
@@ -37,7 +38,10 @@ class App extends Component {
     localStorage.setItem('token', user.token);
 
     this.setState({ auth: currentUser });
+    console.log(user)
   };
+
+  
 
   handleLogout = () => {
     localStorage.removeItem('token');
@@ -51,7 +55,13 @@ class App extends Component {
     });
   }
   savedPalette(newPalette){
-    this.setState({palettes: [...this.state.palettes, newPalette]});
+    this.setState(
+      {palettes: [...this.state.palettes, newPalette]},
+      this.syncLocalStorage
+      );
+  }
+  syncLocalStorage(){
+    window.localStorage.setItem("palettes", JSON.stringify(this.state.palettes));
   }
   render() {
     return (
@@ -63,7 +73,7 @@ class App extends Component {
               return <Login {...routerProps} handleLogin={this.handleLogin} />;
             }}
          />
-        <Route exact path="/Signup" render={() => <Signup/>}/>
+        <Route exact path="/Signup" render={(routerProps) => <Signup {...routerProps} handleLogin={this.handleLogin}/>}/>
         <Route exact path="/palette/new" render={(routeProps) => <CreatePalette savedPalette={this.savedPalette} palettes={this.state.palettes} {...routeProps}/>}/>
         <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={this.state.palettes} {...routeProps} /> )}/>
         <Route exact path="/palette/:id"

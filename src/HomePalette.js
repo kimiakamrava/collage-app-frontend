@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const style = {
     root:{
@@ -9,9 +10,11 @@ const style = {
       padding:"0.5rem",
       position: "relative",
       overflow: "hidden",
-      "&:hover": {
-          cursor: "pointer"
+      "&:hover svg": {
+          opacity: 1,
+          
         }
+
     },
     colors: {
       backgroundColor: "white",
@@ -41,7 +44,25 @@ const style = {
         position: "relative",
         marginBottom:"-2px",
         borderRadius:"hidden",
-    }
+    },
+
+    delete:{
+
+    },
+
+    deleteIcon: {
+      color: "gray",
+      width: "12px",
+      height: "12px",
+      position: "absolute",
+      right: "0px",
+      bottom:  "0px",
+      padding: "10px",
+      zIndex: 8,
+      opacity: 0,
+      
+      
+    },
 };
 
 function HomePalette(props) {
@@ -59,6 +80,9 @@ function HomePalette(props) {
         </div>    
         <h5 className={classes.title}>{paletteName}
         </h5>
+        <div className={classes.delete}>
+          <DeleteIcon className={classes.deleteIcon}/>
+        </div>
         </div>
     );
 }

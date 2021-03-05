@@ -3,6 +3,7 @@ import PaletteBox from "./PaletteBox";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "./Palette.css";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 
 
@@ -34,6 +35,9 @@ import "./Palette.css";
                  isAllColors
                 />
                 {/*Navbar goes here*/}    
+                <div>
+                    <DeleteIcon />
+                </div>
                 <div className="Palette-colors">{paletteBoxes}</div>
                 <Footer paletteName={paletteName}/>
              {/* footer eventually and profile picture*/}
