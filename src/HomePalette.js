@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withStyles } from '@material-ui/styles';
 import DeleteIcon from "@material-ui/icons/Delete";
+import { render } from '@testing-library/react';
 
 const style = {
     root:{
@@ -18,7 +19,7 @@ const style = {
     },
     colors: {
       backgroundColor: "white",
-      height:"150px",
+      height:"50px",
       width: "100%",
       borderRadius: "5px" ,
       overFlow: "hidden",
@@ -33,7 +34,7 @@ const style = {
       margin: "0",
       color: "gray",
       paddingTop: "0.5rem",
-      fontSize: "1rem",
+      fontSize: "0.75rem",
       position: "relative",
     },
     lilColor:{
@@ -65,26 +66,38 @@ const style = {
     },
 };
 
-function HomePalette(props) {
-    const {classes, paletteName, colors} = props;
-    const lilColorGrid = colors.map(color => (
-        <div className={classes.lilColor}
-         style={{backgroundColor: color.color}}
-         key={color.name}
-        />
-    ))
+class HomePalette extends Component {
+  constructor(props){
+    super(props);
+    this.deletePalette = this.deletePalette.bind(this);
+  };
+  deletePalette(e){
+    e.stopPropagation();
+    this.props.handleDeletePalette(this.props.id);
+  }
+   
+    render(){
+      const {classes, paletteName, colors, handleClick} = this.props;
+      const lilColorGrid = colors.map(color => (
+          <div className={classes.lilColor}
+           style={{backgroundColor: color.color}}
+           key={color.name}
+          />
+      ));
     return (
-        <div className={classes.root} onClick={props.handleClick}>
+        <div className={classes.root} onClick={handleClick}>
         <div className={classes.colors}>
         {lilColorGrid}
         </div>    
         <h5 className={classes.title}>{paletteName}
         </h5>
-        <div className={classes.delete}>
-          <DeleteIcon className={classes.deleteIcon}/>
-        </div>
+        
+          <DeleteIcon className={classes.deleteIcon} 
+          onClick={this.deletePalette}/>
+        
         </div>
     );
+  };
 }
 
 export default withStyles(style)(HomePalette);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HomePalette from './HomePalette';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/styles';
 
 const style = {
@@ -13,7 +13,7 @@ const style = {
         
     },
     container: {
-        width: "50%",
+        width: "60%",
         display: "flex",
         alignItems: "flex-start",
         flexDirection : "column",
@@ -24,23 +24,29 @@ const style = {
     },
     nav: {
         display: "flex",
+        borderRadius: "2vh",
         alignItems: "center",
-        height: "6vh",
+        height: "8vh",
         fontSize: "7px",
-        width : "100%",
+        width : "91%",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        padding: "0 13px",
         justifyContent: "space-between",
-        color: "gray", 
+       backgroundColor: "black",
+        color: "white", 
         "& a": {
-            color: "Black",
+            color: "white",
             fontSize : "7px",
             textDecoration: "none",
         }  
     },
     palettes:{
+      
       boxSizing: "border-box",
       width: "100%",
       display: "grid",
-      gridTemplateColumns:"repeat(2, 45%)",
+      gridTemplateColumns:"repeat(3, 30%)",
       gridGap: "2%",
       fontSize: "8px",
     }
@@ -50,19 +56,50 @@ class PaletteAll extends Component {
     openPalette(id) {
     this.props.history.push(`/palette/${id}`);    
     }
+    handleLogout = () => {
+        localStorage.removeItem('token');
+        this.setState({ auth: { currentUser: {} } });
+    };
     render() {
-        const { palettes, classes } = this.props;
+        const loggedIn = !!this.props.user;
+        const { palettes, classes, deletePalette } = this.props;
         return (
             <div className={classes.root}>
                 <div className={classes.container}>
                     <nav className={classes.nav}>
-                     <h1>My Palettes</h1>
-                     <Link to='/palette/new'>Create your Palette</Link>
+                    <h1>My Palettes</h1>
+                    <h2>ToDo</h2>
+                    
+                    <Link to='/palette/new'>Create your Palette</Link>
+                    {loggedIn ? (
+                      <div className="item">
+                        {`Welcome ${this.props.user["currentUser"]["user"]["username"]}`}
+                       </div>
+                    ) : null}
+                   {loggedIn ? (
+                       <a
+                            onClick={() => {
+                             this.props.history.push('/login');
+                             this.props.handleLogout();
+                            }}
+                            className="item"
+                        >
+                    <div className="ui primary button">Log Out</div>
+                </a>
+                ) : (
+                 <Link to="/login" className="item">
+                     <div className="ui primary button">Log In</div>
+                 </Link>
+                )}  
+                     
+                     
                      
                     </nav>
                    <div className={classes.palettes}>  
                      {palettes.map(palette => (
-                       <HomePalette {...palette} handleClick={() => this.openPalette(palette.id)} />
+                       <HomePalette {...palette} handleClick={() => this.openPalette(palette.id)}
+                       handleDeletePalette={deletePalette} key={palette.id} id={palette.id}
+                       />
                     ))}  
                     </div> 
                 </div>
