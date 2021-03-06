@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import NoteList from "./NoteList";
+import NoteForm from "./NoteForm";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
@@ -15,6 +16,9 @@ function Note(){
         {id: 3, task: " pinterest palette red", completed: false},
      ]
     const [notes, setNotes] = useState(initialNotes);
+    const addNote = newNoteText => {
+        setNotes([...notes, {id: 4, task: newNoteText, completed: false}])
+    }
     return (
         <Paper
           style={{
@@ -30,6 +34,7 @@ function Note(){
                     <Typography color='inherit'>MY NOTES</Typography>
                 </Toolbar>
             </AppBar>
+            <NoteForm addNote={addNote}/>
             <NoteList notes={notes} />
         </Paper>
     );
