@@ -2,8 +2,8 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+
+import NoteHelper from "./NoteHelper";
 
 function NoteList(props) {
   return (
@@ -11,9 +11,7 @@ function NoteList(props) {
           <List>
                {props.notes.map(note => (
                    <>
-                  <ListItem>
-                      <ListItemText>{note.task}</ListItemText>
-                  </ListItem>
+                  <NoteHelper task={note.task} key={note.id} completed={note.completed} palette={note.palette}/>
                   <Divider />
                   </>
                 ))} 

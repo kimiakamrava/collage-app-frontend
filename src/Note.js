@@ -25,7 +25,7 @@ function Note(){
               padding: 0,
               margin: 0,
               height: "100vh",
-              backgroundColor: "#fafafa"
+              backgroundColor: "black"
           }}
           elevation={0}
         >
@@ -34,8 +34,12 @@ function Note(){
                     <Typography color='inherit'>MY NOTES</Typography>
                 </Toolbar>
             </AppBar>
-            <NoteForm addNote={addNote}/>
-            <NoteList notes={notes} />
+            <Grid container justify="center" style={{marginTop:"1rem"}}>
+                <Grid item xs={11} md={8} lg={4}>
+              <NoteForm addNote={addNote}/>
+              <NoteList notes={notes} />
+              </Grid>
+            </Grid>
         </Paper>
     );
 }

@@ -23,6 +23,7 @@ const style = {
         
     },
     nav: {
+        marginBottom:"1rem",
         display: "flex",
         borderRadius: "2vh",
         alignItems: "center",

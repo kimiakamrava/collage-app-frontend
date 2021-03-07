@@ -6,7 +6,7 @@ import useInputState from "./ReduxHooks/useInputState";
 function NoteForm({addNote}){
     const [value, handleChange, reset] = useInputState("");
     return(
-        <Paper>
+        <Paper style={{margin: "2rem 0", padding: "0 1rem"}}>
           <form 
              onSubmit={e => {
                  e.preventDefault();
@@ -14,7 +14,7 @@ function NoteForm({addNote}){
                  reset();
               }}
             >
-             <TextField value={value} onChange={handleChange}/>
+             <TextField value={value} onChange={handleChange} margin="normal" label="Add New Note" fullWidth/>
          </form>
         </Paper>
     )
