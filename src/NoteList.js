@@ -6,10 +6,11 @@ import Divider from "@material-ui/core/Divider";
 import NoteHelper from "./NoteHelper";
 
 function NoteList({notes, removeNote, toggleNote, editNote}) {
+  if(notes.length)
   return (
       <Paper>
           <List>
-               {notes.map(note => (
+               {notes.map((note, index) => (
                    <>
                   <NoteHelper 
                   id = {note.id}
@@ -20,11 +21,12 @@ function NoteList({notes, removeNote, toggleNote, editNote}) {
                   toggleNote ={toggleNote}
                   editNote = {editNote}
                    />
-                  <Divider />
+                  {index < note.length - 1 && <Divider />}
                   </>
-                ))} 
+                ))}
           </List>
       </Paper>   
   );
+  return null;
 }
 export default NoteList;

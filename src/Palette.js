@@ -3,7 +3,9 @@ import PaletteBox from "./PaletteBox";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "./Palette.css";
-import DeleteIcon from "@material-ui/icons/Delete";
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import { Link } from "react-router-dom";
+
 
 
 
@@ -33,13 +35,15 @@ import DeleteIcon from "@material-ui/icons/Delete";
                  changeLevel={this.changeLevel}
                  handleChange={this.changeFormat}
                  isAllColors
+                 
                 />
-                {/*Navbar goes here*/}    
-                <div>
-                    <DeleteIcon />
-                </div>
+                {/*Navbar goes here*/}   
+               
                 <div className="Palette-colors">{paletteBoxes}</div>
-                <Footer paletteName={paletteName}/>
+                <Link to='/palette/note'><EventNoteIcon/></Link>
+                
+                <Footer paletteName={paletteName}  />
+                
              {/* footer eventually and profile picture*/}
             </div>
         );

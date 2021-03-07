@@ -12,8 +12,11 @@ function NoteEdit({ id, editNote, task, toggle}) {
          editNote(id, value);
          reset();
          toggle();
-        }}> 
-        <TextField margin="normal" value={value} onChange={handleChange} fullWidth />
+        }}
+        style ={{marginLeft: "1rem", width:"80%"}}
+        
+        > 
+        <TextField margin="normal" value={value} onChange={handleChange} fullWidth autoFocus />
         </form>
     );
 }

@@ -69,9 +69,9 @@ class PaletteAll extends Component {
                 <div className={classes.container}>
                     <nav className={classes.nav}>
                     <h1>My Palettes</h1>
-                    <h2>ToDo</h2>
-                    
+                    {/* <link to = '/'>Palettes Notes</link> */}
                     <Link to='/palette/new'>Create your Palette</Link>
+                    <Link to='/palette/note'>palette notes</Link>
                     {loggedIn ? (
                       <div className="item">
                         {`Welcome ${this.props.user["currentUser"]["user"]["username"]}`}
@@ -91,6 +91,7 @@ class PaletteAll extends Component {
                  <Link to="/login" className="item">
                      <div className="ui primary button">Log In</div>
                  </Link>
+                 
                 )}  
                      
                      

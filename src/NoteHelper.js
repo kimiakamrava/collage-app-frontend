@@ -12,7 +12,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 function NoteHelper({task, completed, removeNote, toggleNote, id, editNote}) {
     const [editLoading, toggle] = Toggle(false);
     return (
-    <ListItem>
+    <ListItem style={{ height:"64px"}}>
         {editLoading ? ( 
             <NoteEdit editNote={editNote} id={id} task={task} toggle={toggle}/>
         ) : ( 

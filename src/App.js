@@ -90,7 +90,7 @@ class App extends Component {
     return (
       
       <Switch>
-        <Route exact path="/" render={() => <Note />}/>
+        <Route exact path="/" render={() => <h1>welcome</h1>}/>
 
         <Route
             path="/login"
@@ -99,9 +99,8 @@ class App extends Component {
             }}
          />
         <Route exact path="/Signup" render={(routerProps) => <Signup {...routerProps} handleLogin={this.handleLogin}/>}/>
-        
-       
         <Route exact path="/palette/new" render={(routeProps) => <CreatePalette savedPalette={this.savedPalette} palettes={this.state.palettes} {...routeProps}/>}/>
+        <Route exact path='/palette/note' render={() => <Note />}/>
         <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={this.state.palettes} deletePalette={this.deletePalette} {...routeProps} user={this.state.auth} handleLogout={this.handleLogout}  /> )}/>
         <Route exact path="/palette/:id"
          render={routeProps => (

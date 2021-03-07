@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import NoteList from "./NoteList";
 import NoteForm from "./NoteForm";
 import Typography from "@material-ui/core/Typography";
@@ -6,17 +6,20 @@ import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
+import PaletteTwoToneIcon from '@material-ui/icons/PaletteTwoTone';
 import { v4 as uuidv4 } from 'uuid';
 import App from "./App";
+import { Link } from "react-router-dom";
+
 
 
 function Note(){
-    const initialNotes = [
-        {id: 1, task: "study FaceBook Palette", completed: false},
-        {id: 2, task: "suggestions pinterest palette", completed: true},
-        {id: 3, task: " pinterest palette red", completed: false},
-     ]
+    const initialNotes = JSON.parse(window.localStorage.getItem('notes') || "[]");
+   
     const [notes, setNotes] = useState(initialNotes);
+    useEffect(() => {
+       window.localStorage.setItem("notes", JSON.stringify(notes));
+    }, [notes]);
     const addNote = newNoteText => {
         setNotes([...notes, {id: uuidv4(), task: newNoteText, completed: false}])
     };
@@ -39,6 +42,7 @@ function Note(){
     return (
         <Paper
           style={{
+             
               padding: 0,
               margin: 0,
               height: "100vh",
@@ -46,9 +50,29 @@ function Note(){
           }}
           elevation={0}
         >
-            <AppBar color='default' position='static' style={{ height: "64px"}}>
+            <AppBar color='default' position='static' style={{
+                 marginBottom:"1rem",
+                 display: "flex",
+                 borderRadius: "2vh",
+                 alignItems: "center",
+                 height: "8vh",
+                 fontSize: "7px",
+                 width : "91%",
+                 flexWrap: "wrap",
+                 justifyContent: "center",
+                 padding: "0 13px",
+                 justifyContent: "space-between",
+                backgroundColor: "black",
+                 color: "white",
+                 textDecoration: "none",
+               
+                
+                }}>
                 <Toolbar>
-                    <Typography color='inherit'>MY NOTES</Typography>
+                    <Typography color='inherit'>PALETTE NOTES</Typography>
+                    <Link to='/palettes'><PaletteTwoToneIcon/></Link>
+                    {/* <a href="link of react route">LET'S PALETTE</a> */}
+                
                 </Toolbar>
             </AppBar>
             <Grid container justify="center" style={{marginTop:"1rem"}}>
