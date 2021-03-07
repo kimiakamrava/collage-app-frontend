@@ -5,13 +5,20 @@ import Divider from "@material-ui/core/Divider";
 
 import NoteHelper from "./NoteHelper";
 
-function NoteList(props) {
+function NoteList({notes, removeNote, toggleNote}) {
   return (
       <Paper>
           <List>
-               {props.notes.map(note => (
+               {notes.map(note => (
                    <>
-                  <NoteHelper task={note.task} key={note.id} completed={note.completed} palette={note.palette}/>
+                  <NoteHelper 
+                  id = {note.id}
+                  task={note.task} 
+                  key={note.id} completed={note.completed}
+                  palette={note.palette}
+                  removeNote={removeNote}
+                  toggleNote ={toggleNote}
+                   />
                   <Divider />
                   </>
                 ))} 

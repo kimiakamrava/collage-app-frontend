@@ -23,6 +23,7 @@
     "react-scripts": "4.0.3",
     "react-sortable-hoc": "^1.11.0",
     "start": "^5.1.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

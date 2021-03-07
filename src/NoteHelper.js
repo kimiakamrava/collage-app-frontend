@@ -7,16 +7,16 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 import React from "react";
-function NoteHelper({task, completed}) {
+function NoteHelper({task, completed, removeNote, toggleNote, id}) {
     
     return (
     <ListItem>
-        <CheckBox  disableRipple tabIndex={-1}  checked={completed} />
+        <CheckBox  disableRipple tabIndex={-1}  checked={completed} onClick={() => toggleNote(id)} />
     <ListItemText style={{textDecoration: completed ? "Line-through": "none" }}>
       {task}  
     </ListItemText>
     <ListItemSecondaryAction>
-        <IconButton><DeleteIcon/></IconButton>
+        <IconButton onClick={() => removeNote(id)}><DeleteIcon/></IconButton>
         <IconButton><EditOutlinedIcon/></IconButton>
     </ListItemSecondaryAction>
    </ListItem>
