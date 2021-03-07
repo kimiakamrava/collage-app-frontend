@@ -5,7 +5,7 @@ import Divider from "@material-ui/core/Divider";
 
 import NoteHelper from "./NoteHelper";
 
-function NoteList({notes, removeNote, toggleNote}) {
+function NoteList({notes, removeNote, toggleNote, editNote}) {
   return (
       <Paper>
           <List>
@@ -18,6 +18,7 @@ function NoteList({notes, removeNote, toggleNote}) {
                   palette={note.palette}
                   removeNote={removeNote}
                   toggleNote ={toggleNote}
+                  editNote = {editNote}
                    />
                   <Divider />
                   </>

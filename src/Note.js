@@ -29,6 +29,12 @@ function Note(){
             note.id === noteId ? {...note, completed: !note.completed}: note
         );
         setNotes(updatedNotes);
+    };
+    const editNote = (noteId, newTask) => {
+        const updatedNotes = notes.map(note =>
+            note.id === noteId ? {...note, task: newTask } : note
+        );
+        setNotes(updatedNotes);  
     }
     return (
         <Paper
@@ -48,7 +54,7 @@ function Note(){
             <Grid container justify="center" style={{marginTop:"1rem"}}>
                 <Grid item xs={11} md={8} lg={4}>
               <NoteForm addNote={addNote}/>
-              <NoteList notes={notes} removeNote={removeNote} toggleNote={toggleNote} />
+              <NoteList notes={notes} removeNote={removeNote} toggleNote={toggleNote} editNote={editNote} />
               </Grid>
             </Grid>
         </Paper>
