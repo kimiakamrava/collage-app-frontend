@@ -7,8 +7,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import PhotoLibraryRoundedIcon from '@material-ui/icons/PhotoLibraryRounded';
+import PaletteTwoToneIcon from '@material-ui/icons/PaletteTwoTone';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 import Button from "@material-ui/core/Button";
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
 
 class CreateNav extends Component {
     constructor(props){
@@ -64,6 +68,9 @@ class CreateNav extends Component {
                     
                     <Button variant='outlined' color="gray" type="submit">Save</Button>
                     <Link to="/palettes"><Button variant="outlined"  color="gray">LET'S PALETTE</Button></Link>
+                    <Link to='/palettes'><PaletteTwoToneIcon/></Link>
+                    <Link to='/palette/note'><EventNoteIcon/></Link>
+                    <Link to='/palette/painting'><PhotoLibraryRoundedIcon/></Link>
                     </ValidatorForm>
                 </Toolbar>
                 </AppBar>

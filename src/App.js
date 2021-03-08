@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import Palette from "./Palette";
 import Note from "./Note"
+import Painting from './Painting';
 import PaletteAll from "./PaletteAll";
 import ColorShadePalette from "./ColorShadePalette";
 import seedColors from "./seedColors";
@@ -11,6 +12,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import { createPalette } from "./materialHelpers";
 import api from './api';
+
 
 
 
@@ -104,6 +106,8 @@ class App extends Component {
         <Route exact path="/Signup" render={(routerProps) => <Signup {...routerProps} handleLogin={this.handleLogin}/>}/>
         <Route exact path="/palette/new" render={(routeProps) => <CreatePalette savedPalette={this.savedPalette} palettes={this.state.palettes} {...routeProps}/>}/>
         <Route exact path='/palette/note' render={() => <Note />}/>
+        <Route exact path='/palette/painting' render={() => <Painting />}/>
+        
         <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={this.state.palettes} deletePalette={this.deletePalette} {...routeProps} user={this.state.auth} handleLogout={this.handleLogout}  /> )}/>
         <Route exact path="/palette/:id"
          render={routeProps => (

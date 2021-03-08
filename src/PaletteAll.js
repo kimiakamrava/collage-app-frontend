@@ -53,6 +53,13 @@ const style = {
       gridTemplateColumns:"repeat(3, 30%)",
       gridGap: "2%",
       fontSize: "8px",
+    },
+    footer: {
+        background: "black",
+        
+        minHeight: "100px",
+        textAlign: "center",
+        paddingTop: "30px",
     }
 };
 
@@ -83,6 +90,8 @@ class PaletteAll extends Component {
                     {/* <link to = '/'>Palettes Notes</link> */}
                     <Link to='/palette/new'>Create your Palette</Link>
                     <Link to='/palette/note'>palette notes</Link>
+                    <Link to='/palette/painting'>inspiration</Link>
+                   
                    
                     {loggedIn ? (
                       <div className="item">
@@ -115,6 +124,9 @@ class PaletteAll extends Component {
                     ))}  
                     </div> 
                 </div>
+                <footer className={classes.footer}>
+        
+             </footer>
             </div>
         );
     }

@@ -1,0 +1,143 @@
+.Painting {
+    /* /* background: #E1D1B9;  */
+    
+    min-height: 100vh;
+  }
+  
+  
+  
+  .form-container {
+    min-height: 30vh;
+        display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      background-color:(#D09D99);
+        background-size: contain;
+        background-position: center;
+        opacity: 0.7;
+  }
+  
+  .form-container h1 {
+    /* color: #D09D99; */
+    /* color: #A6C3B7; */
+    font-size: 1em;
+    text-align: left;
+    /* opacity: 1; */
+    /* \background: rgb(230, 228, 228, 0.5); */
+  }
+  
+  .search-form {
+    min-height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    color: transparent;
+  
+  }
+  
+  .search-bar {
+    width: 300px;
+    border: none;
+    padding: 10px;
+    background-color: transparent;
+     border: 0;
+    border-bottom: 1.5px black solid;
+    border-radius: 0;
+    margin-right: 25px;
+    font-size: 1.2em;
+    font-weight: bolder;
+    color: black;
+  
+  }
+  
+  form input {
+    transition: all .25s ease-in;
+   
+  }
+  
+  form input:focus {
+    background-color: transparent;
+    transform: scale(1.1);
+  }
+  
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: gray;
+    opacity: 1; /* Firefox */
+  }
+  
+  .search-button {
+    padding: 10px;
+    background: black;
+    font-size: 1em;
+    cursor: pointer;
+    border: 2px balck solid;
+    border-radius: 10%;
+    color: white;
+    transition: all .25s ease-in;
+  
+  
+  }
+  
+  .search-button:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .75);
+  }
+  
+  .art-list {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .art-image {
+    max-width: 250px;
+  }
+  
+  .query {
+    color: green;
+  }
+  
+  .main-container {
+    padding: 10px;
+  
+  }
+  
+  footer {
+     background: black;
+     
+     min-height: 100px;
+     text-align: center;
+     padding-top: 30px;
+  }
+  nav {
+    margin-bottom:1rem;
+    justify-content: center;
+    display: flex;
+    border-radius: 2vh;
+    align-items: center;
+    height: 8vh;
+    font-size: 7px;
+    width : 91%;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 13px;
+    
+   background-color: black;
+    color: white; 
+  }
+  
+  .hero {
+  margin: 50px;
+  text-align: center;
+  } 
+  
+  .hero h1 {
+    color: #555;
+    font-weight: 300;
+  }
+  
+  .spinner-container {
+    text-align: center;
+  }
