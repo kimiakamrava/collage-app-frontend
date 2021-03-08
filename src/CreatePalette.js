@@ -74,7 +74,11 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginLeft: 0
-  }
+  },
+  selectButton:{
+   width: "10px",
+  },
+
 });
 
 class CreatePalette extends Component {
@@ -141,8 +145,14 @@ class CreatePalette extends Component {
 
   shuffle() {
    const allColors = this.props.palettes.map(p => p.colors).flat();
-   const random = Math.floor(Math.random() * allColors.length);
-   const randColor = allColors[random];
+   let random ;
+   let randColor ;
+   let colorDoubled = true;
+   while(colorDoubled) {
+     random = Math.floor(Math.random() * allColors.length);
+     randColor = allColors[random];
+     colorDoubled = this.state.colors.some(color => color.name === randColor.name);
+   }
    this.setState({colors: [...this.state.colors, randColor] });
   }
 
@@ -163,6 +173,8 @@ class CreatePalette extends Component {
       colors: arrayMove(colors, oldIndex, newIndex),
     }));
   };
+
+  
  
 
 
@@ -177,6 +189,7 @@ class CreatePalette extends Component {
         handleDrawerOpen={ this.handleDrawerOpen} />
       
         <Drawer
+        
           className={classes.drawer}
           variant='persistent'
           anchor='left'
@@ -190,6 +203,7 @@ class CreatePalette extends Component {
               <ChevronLeftIcon />
             </IconButton>
           </div>
+          
           <Divider />
          
           <div>
@@ -207,6 +221,7 @@ class CreatePalette extends Component {
             <TextValidator value={this.state.newName} name='newName' onChange={this.handleChange}
             validators={["required", "uniqueColorName","uniqueColor"]}
             errorMessages={["this section is required!", "oops you already took that name!","oops you already took that color!"]}/>
+            <div className={classes.selectButton}>
             <Button
             variant='outlined'
             type="submit"
@@ -215,11 +230,13 @@ class CreatePalette extends Component {
           >
             {full ? "Your palette is full" : "Select"}
           </Button>
+          </div>
           </ValidatorForm>
            
           <Button variant='outlined' color='gray' onClick={this.clearPalette}>
               Clear
             </Button>
+            
         </Drawer>
         <main
           className={classNames(classes.content, {

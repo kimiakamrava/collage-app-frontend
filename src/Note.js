@@ -71,6 +71,7 @@ function Note(){
                 <Toolbar>
                     <Typography color='inherit'>PALETTE NOTES</Typography>
                     <Link to='/palettes'><PaletteTwoToneIcon/></Link>
+                    
                     {/* <a href="link of react route">LET'S PALETTE</a> */}
                 
                 </Toolbar>

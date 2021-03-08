@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import HomePalette from './HomePalette';
 import { Link, withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/styles';
+import api from './api';
+import seedColors from "./seedColors";
+
 
 const style = {
     root: {
@@ -54,16 +57,24 @@ const style = {
 };
 
 class PaletteAll extends Component {
+
+      
+    
     openPalette(id) {
     this.props.history.push(`/palette/${id}`);    
     }
+  
     handleLogout = () => {
         localStorage.removeItem('token');
         this.setState({ auth: { currentUser: {} } });
     };
+    
+    
+   
     render() {
         const loggedIn = !!this.props.user;
         const { palettes, classes, deletePalette } = this.props;
+        
         return (
             <div className={classes.root}>
                 <div className={classes.container}>
@@ -72,6 +83,7 @@ class PaletteAll extends Component {
                     {/* <link to = '/'>Palettes Notes</link> */}
                     <Link to='/palette/new'>Create your Palette</Link>
                     <Link to='/palette/note'>palette notes</Link>
+                   
                     {loggedIn ? (
                       <div className="item">
                         {`Welcome ${this.props.user["currentUser"]["user"]["username"]}`}
@@ -92,15 +104,13 @@ class PaletteAll extends Component {
                      <div className="ui primary button">Log In</div>
                  </Link>
                  
-                )}  
-                     
-                     
-                     
+                )}   
                     </nav>
+                    
                    <div className={classes.palettes}>  
                      {palettes.map(palette => (
                        <HomePalette {...palette} handleClick={() => this.openPalette(palette.id)}
-                       handleDeletePalette={deletePalette} key={palette.id} id={palette.id}
+                       handleDeletePalette={deletePalette} key={palette.id} id={palette.id} 
                        />
                     ))}  
                     </div> 

@@ -22,6 +22,9 @@ import { Link } from "react-router-dom";
         changeFormat(value) {
          this.setState({ format: value });
         }
+        goToPaletteNote(id){
+            this.props.history.push()
+        }
     render() {
         const { colors, paletteName, id } =this.props.palette;
         const { level, format }  =this.state

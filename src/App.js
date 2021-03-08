@@ -87,6 +87,9 @@ class App extends Component {
     window.localStorage.setItem("palettes", JSON.stringify(this.state.palettes));
   }
   render() {
+    if (this.state.islogout) {
+      return <Redirect to="/login" />;
+    }
     return (
       
       <Switch>
@@ -119,6 +122,11 @@ class App extends Component {
          />
         )}
         />
+        <Route 
+            render={(routerProps) => {
+              return <Login {...routerProps} handleLogin={this.handleLogin} />;
+            }}
+         />
       </Switch>
     );
   };
