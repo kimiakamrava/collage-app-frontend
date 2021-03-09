@@ -6,7 +6,7 @@ import Painting from './Painting';
 import PaletteAll from "./PaletteAll";
 import ColorShadePalette from "./ColorShadePalette";
 import seedColors from "./seedColors";
-
+import WebTest from "./WebTest";
 import CreatePalette from "./CreatePalette";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -107,7 +107,7 @@ class App extends Component {
         <Route exact path="/palette/new" render={(routeProps) => <CreatePalette savedPalette={this.savedPalette} palettes={this.state.palettes} {...routeProps}/>}/>
         <Route exact path='/palette/note' render={() => <Note />}/>
         <Route exact path='/palette/painting' render={() => <Painting />}/>
-        
+        <Route exact path='/palette/test' render={() => <WebTest />}/>
         <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={this.state.palettes} deletePalette={this.deletePalette} {...routeProps} user={this.state.auth} handleLogout={this.handleLogout}  /> )}/>
         <Route exact path="/palette/:id"
          render={routeProps => (

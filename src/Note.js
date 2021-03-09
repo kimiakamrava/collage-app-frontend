@@ -65,6 +65,7 @@ function Note(){
                 backgroundColor: "black",
                  color: "white",
                  textDecoration: "none",
+                 marginRight:"15px",
                
                 
                 }}>

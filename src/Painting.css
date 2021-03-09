@@ -118,13 +118,16 @@
     border-radius: 2vh;
     align-items: center;
     height: 8vh;
-    font-size: 7px;
-    width : 91%;
+    font-size: 10px;
+    width : 97,5%;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 0 13px;
-    
-   background-color: black;
+    padding: 18px 18px;
+    position: center;
+    display: flex;
+    align-items:flex-start;
+    justify-content: center;
+    background-color: black;
     color: white; 
   }
   

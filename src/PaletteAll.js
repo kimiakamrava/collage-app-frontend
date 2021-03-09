@@ -56,10 +56,17 @@ const style = {
     },
     footer: {
         background: "black",
+        width:"100%",
+        Bottom:"0",
+        marginBottom:"-10vh",
+        height: "5vh",
+        display: "flex",
+        justifyContent: "flexEnd",
+        alignItems: "center",
+        color: "white",
+        padding: "0 13px",
         
-        minHeight: "100px",
-        textAlign: "center",
-        paddingTop: "30px",
+        
     }
 };
 
@@ -122,11 +129,14 @@ class PaletteAll extends Component {
                        handleDeletePalette={deletePalette} key={palette.id} id={palette.id} 
                        />
                     ))}  
+                    
                     </div> 
+                    {/* <footer className={classes.footer}>
+
+                    </footer> */}
+                    
                 </div>
-                <footer className={classes.footer}>
-        
-             </footer>
+               
             </div>
         );
     }

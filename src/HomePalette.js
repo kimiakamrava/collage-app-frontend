@@ -36,10 +36,13 @@ const style = {
       paddingTop: "0.5rem",
       fontSize: "0.75rem",
       position: "relative",
+      borderLine:"1px",
+      borderRadius:"3%",
+      borderColor: "black",
     },
     lilColor:{
-        height:"50%",
-        width:"10%",
+        height:"60%",
+        width:"6%",
         display: "inline-block",
         margin:"0 auto",
         position: "relative",
@@ -94,9 +97,8 @@ class HomePalette extends Component {
         
           <DeleteIcon className={classes.deleteIcon} 
           onClick={this.deletePalette}/>
-        
-        </div>
-    );
+        </div>   
+      );
   };
 }
 
