@@ -22,7 +22,7 @@ const Painting = () => {
   }, [query])  
   const getArt = () => {
     showSpinner();
-    setTimeout(() => hideSpinner(), 5000)
+    setTimeout(() => hideSpinner(), 1000)
     fetch('https://collectionapi.metmuseum.org/public/collection/v1/search?isHighlight=true&q=' + query)
     .then(response => response.json())
   

@@ -9,6 +9,7 @@ import seedColors from "./seedColors";
 import WebTest from "./WebTest";
 import SvgTest from './SvgTest';
 import CreatePalette from "./CreatePalette";
+import Welcome from "./Welcome";
 import Login from "./Login";
 import {SignupForm} from "./Login/index";
 import { LoginForm } from "./Login/index";
@@ -98,7 +99,7 @@ class App extends Component {
     return (
       
       <Switch>
-        <Route exact path="/" render={() => <LoginForm/>}/>
+        <Route exact path="/" render={() => <Welcome/>}/>
         
 
          <Route
