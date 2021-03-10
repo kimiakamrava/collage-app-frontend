@@ -41,16 +41,16 @@ class CreateNav extends Component {
         return (
             <div>
              <CssBaseline />
-                <AppBar
-                position='fixed'
-                color='default'
+                <AppBar style={{ background: 'white', height: "85px" } }
+                
+                
                 className={classNames(classes.appBar, {
                     [classes.appBarShift]: open
                 })}
                 >
                 <Toolbar disableGutters={!open}>
                     <IconButton
-                    color='inherit'
+                    color='black'
                     aria-label='Open drawer'
                     onClick={this.props.handleDrawerOpen}
                     className={classNames(classes.menuButton, open && classes.hide)}
@@ -61,16 +61,16 @@ class CreateNav extends Component {
                     Persistent drawer
                     </Typography>
                     <ValidatorForm onSubmit={() => this.props.handleSavedPalette(newPaletteName)}>
-                    <TextValidator label="Palette Name" value={this.state.newPaletteName} name="newPaletteName"
+                    <TextValidator  label="Palette Name" value={this.state.newPaletteName} name="newPaletteName"
                     onChange={this.handleChange}
                     validators={["required","uniquePalette"]}
                     errorMessages={["Please Name your Palette", "Already used name"]} />
                     
                     <Button variant='outlined' color="gray" type="submit">Save</Button>
-                    <Link to="/palettes"><Button variant="outlined"  color="gray">LET'S PALETTE</Button></Link>
-                    <Link to='/palettes'><PaletteTwoToneIcon/></Link>
-                    <Link to='/palette/note'><EventNoteIcon/></Link>
-                    <Link to='/palette/painting'><PhotoLibraryRoundedIcon/></Link>
+                   m<Link to="/palettes"><Button variant="outlined"  backgroundcolor="black">LET'S PALETTE</Button></Link> 
+                    <Link to='/palettes'><PaletteTwoToneIcon style={{fill:"balck"}}/></Link>
+                    <Link to='/palette/note'><EventNoteIcon style={{fill:"black"}}/></Link>
+                    <Link to='/palette/painting'><PhotoLibraryRoundedIcon style={{fill:"black"}}/></Link>
                     </ValidatorForm>
                 </Toolbar>
                 </AppBar>

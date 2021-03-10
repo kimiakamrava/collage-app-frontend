@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BackGround from './styles/BackGround.svg'
 import HomePalette from './HomePalette';
 import { Link, withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/styles';
@@ -13,7 +14,11 @@ const style = {
         display: "flex",
         alignItems:"flex-start",
         justifyContent: "center",
-        
+        /* background by SVGBackgrounds.com */
+        backgroundColor: "#ffffff",
+        backgroundImage: `url(${BackGround})`,
+        overflow: "scroll",
+       
     },
     container: {
         width: "60%",

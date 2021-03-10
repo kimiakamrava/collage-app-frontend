@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import Palette from "./Palette";
-import Note from "./Note"
+import Note from "./Note";
 import Painting from './Painting';
 import PaletteAll from "./PaletteAll";
 import ColorShadePalette from "./ColorShadePalette";
 import seedColors from "./seedColors";
 import WebTest from "./WebTest";
+import SvgTest from './SvgTest';
 import CreatePalette from "./CreatePalette";
 import Login from "./Login";
-import Signup from "./Signup";
+import {SignupForm} from "./Login/index";
+import { LoginForm } from "./Login/index";
 import { createPalette } from "./materialHelpers";
 import api from './api';
+
 
 
 
@@ -95,19 +98,22 @@ class App extends Component {
     return (
       
       <Switch>
-        <Route exact path="/" render={() => <h1>welcome</h1>}/>
+        <Route exact path="/" render={() => <LoginForm/>}/>
+        
 
-        <Route
+         <Route
             path="/login"
             render={(routerProps) => {
-              return <Login {...routerProps} handleLogin={this.handleLogin} />;
+              return <LoginForm {...routerProps} handleLogin={this.handleLogin} />;
             }}
-         />
-        <Route exact path="/Signup" render={(routerProps) => <Signup {...routerProps} handleLogin={this.handleLogin}/>}/>
+         /> 
+        <Route exact path="/Signup" render={(routerProps) => <SignupForm {...routerProps} handleLogin={this.handleLogin}/>}/>
         <Route exact path="/palette/new" render={(routeProps) => <CreatePalette savedPalette={this.savedPalette} palettes={this.state.palettes} {...routeProps}/>}/>
         <Route exact path='/palette/note' render={() => <Note />}/>
         <Route exact path='/palette/painting' render={() => <Painting />}/>
         <Route exact path='/palette/test' render={() => <WebTest />}/>
+        <Route exact path='/palette/svg' render={() => <SvgTest />}/>
+
         <Route exact path="/palettes" render={routeProps => ( <PaletteAll palettes={this.state.palettes} deletePalette={this.deletePalette} {...routeProps} user={this.state.auth} handleLogout={this.handleLogout}  /> )}/>
         <Route exact path="/palette/:id"
          render={routeProps => (
